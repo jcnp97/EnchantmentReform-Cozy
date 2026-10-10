@@ -52,18 +52,18 @@ public final class InitManager extends AbstractManager {
         resourceOutputFolder("enchantments", false);
         resourceOutputFolder("vanilla_enchantments", false);
 
-        resourceOutput("enchantments/armor/air_dash.yml", true);
-        resourceOutput("enchantments/armor/charged_leap.yml", true);
-        resourceOutput("enchantments/armor/experience_refund.yml", true);
-        resourceOutput("enchantments/armor/lapis_refund.yml", true);
-        resourceOutput("enchantments/armor/lava_grace.yml", true);
-        resourceOutput("enchantments/armor/liquid_surface_breathing.yml", true);
-        resourceOutput("enchantments/armor/melee_dodge.yml", true);
-        resourceOutput("enchantments/armor/piglin_disguise.yml", true);
-        resourceOutput("enchantments/armor/projectile_dodge.yml", true);
-        resourceOutput("enchantments/melee/cleave.yml", true);
-        resourceOutput("enchantments/tools/bark_hide.yml", true);
-        resourceOutput("enchantments/tools/ore_guard.yml", true);
+//        resourceOutput("enchantments/armor/air_dash.yml", true);
+//        resourceOutput("enchantments/armor/charged_leap.yml", true);
+//        resourceOutput("enchantments/armor/experience_refund.yml", true);
+//        resourceOutput("enchantments/armor/lapis_refund.yml", true);
+//        resourceOutput("enchantments/armor/lava_grace.yml", true);
+//        resourceOutput("enchantments/armor/liquid_surface_breathing.yml", true);
+//        resourceOutput("enchantments/armor/melee_dodge.yml", true);
+//        resourceOutput("enchantments/armor/piglin_disguise.yml", true);
+//        resourceOutput("enchantments/armor/projectile_dodge.yml", true);
+//        resourceOutput("enchantments/melee/cleave.yml", true);
+//        resourceOutput("enchantments/tools/bark_hide.yml", true);
+//        resourceOutput("enchantments/tools/ore_guard.yml", true);
     }
 
     private void resourceOutputFolder(String folderName, boolean regenerate) {
