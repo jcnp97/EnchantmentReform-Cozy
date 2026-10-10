@@ -3,10 +3,13 @@ package cn.superiormc.enchantmentreform.objects.abilities;
 import cn.superiormc.enchantmentreform.api.trigger.EntitySelector;
 import cn.superiormc.enchantmentreform.hooks.ItemPriceUtil;
 import cn.superiormc.enchantmentreform.managers.AbilityManager;
+import cn.superiormc.enchantmentreform.managers.AttributeManager;
 import cn.superiormc.enchantmentreform.managers.ErrorManager;
 import cn.superiormc.enchantmentreform.managers.HookManager;
+import cn.superiormc.enchantmentreform.managers.PowerModifiersManager;
 import cn.superiormc.enchantmentreform.methods.BuildItem;
 import cn.superiormc.enchantmentreform.objects.ItemStorage;
+import cn.superiormc.enchantmentreform.objects.ObjectCustomAttribute;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -115,7 +118,7 @@ public final class CostPriceAbility extends AbstractAbility {
             case VANILLA_ECONOMY -> HookManager.hookManager.getPrice(
                     player,
                     price.getString("economy-type", ""),
-                    (int) cost,
+                    experienceCostAfterReduction(price, player, cost),
                     take);
             case CUSTOM -> getDouble("price.match-placeholder", player, context) >= cost;
             case FREE, RESERVE -> true;
@@ -151,6 +154,27 @@ public final class CostPriceAbility extends AbstractAbility {
             return false;
         }
         return ItemPriceUtil.getPrice(storage, item, (int) cost, take);
+    }
+
+    private int experienceCostAfterReduction(ConfigurationSection price,
+                                             Player player,
+                                             double configuredCost) {
+        int baseCost = (int) configuredCost;
+        if (baseCost <= 0 || price == null
+                || !"exp".equalsIgnoreCase(price.getString("economy-type", ""))) {
+            return baseCost;
+        }
+
+        AttributeManager manager = AttributeManager.attributeManager;
+        ObjectCustomAttribute reduction = manager == null
+                ? null
+                : manager.resolveAttribute("xp_cost_reduction");
+        if (reduction == null) {
+            return baseCost;
+        }
+
+        int percent = Math.clamp(reduction.getValue(player), 0, 100);
+        return (int) Math.ceil(baseCost * (100.0D - percent) / 100.0D);
     }
 
     @Override
