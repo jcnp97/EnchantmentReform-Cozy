@@ -259,5 +259,9 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>phoenix</id>
+            <url>https://nexus.phoenixdevt.fr/repository/maven-public/</url>
+        </repository>
     </repositories>
 </project>
